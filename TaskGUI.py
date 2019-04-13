@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from binaryTree import Node
 
 # GUI for Task Organizer
 
@@ -10,12 +11,20 @@ layout = [
         ]
 
 window = sg.Window('Task Organizer App').Layout(layout)
+root = Node(None)
+
+dict = {'LOW': 1, 'MEDIUM': 2, 'HIGH': 3}
 
 while True:
     event, values = window.Read()
-    if event is not None:
-        print(values[0], values[1])
-    if event == 'Done':
+    if event is not None and event == 'Add':
+        print(event, dict[values[1]])
+        root.insert(dict[values[1]])
+    if event == 'Done' or event is None:
+        print('SIZE:')
+        print(root.getSize())
+        print('TREE:')
+        root.PrintTree()
         break
 
 window.Close()
