@@ -3,34 +3,37 @@
 # Workflow Automation: Prioritize
 # Binary Tree Data Structure
 
-#include everything
-
 class Node:
 
-    def __init__(self, task, data):
+    def __init__(self, task, data, dueDate):
         self.left = None
         self.right = None
         self.data = data
         self.task = task
+        self.dueDate = dueDate
 
-    def insert(self, task, data): #compare the new value wiht the parent node
+    def insert(self, task, data, dueDate): #compare the new value wiht the parent node
+        newSum = data + dueDate
+        oldSum = self.data + self.dueDate
+
         if self.data:
-            if data < self.data:
+            if oldSum > newSum:
                 if self.left is None:
-                    self.left = Node(task, data)
+                    self.left = Node(task, data, dueDate)
                 else:
-                    self.left.insert(task, data)
-            elif data > self.data:
+                    self.left.insert(task, data, dueDate)
+            elif oldSum < newSum:
                 if self.right is None:
-                    self.right = Node(task, data)
+                    self.right = Node(task, data, dueDate)
                 else:
-                    self.right.insert(task, data)
-            elif data == self.data:
-                self.right.insert(task, data)
+                    self.right.insert(task, data, dueDate)
+            elif oldSum == newSum:
+                self.right.insert(task, data, dueDate)
 
         else:
             self.data = data
             self.task = task
+            self.dueDate = dueDate
         
         return self
 
