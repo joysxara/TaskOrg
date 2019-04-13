@@ -26,6 +26,8 @@ class Node:
                     self.right = Node(task, data)
                 else:
                     self.right.insert(task, data)
+            elif data == self.data:
+                self.right.insert(task, data)
 
         else:
             self.data = data
