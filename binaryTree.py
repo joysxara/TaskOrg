@@ -7,26 +7,30 @@
 
 class Node:
 
-    def __init__(self, data):
+    def __init__(self, task, data):
         self.left = None
         self.right = None
         self.data = data
+        self.task = task
 
-    def insert(self, data): #compare the new value wiht the parent node
+    def insert(self, task, data): #compare the new value wiht the parent node
         if self.data:
             if data < self.data:
                 if self.left is None:
-                    self.left = Node(data)
+                    self.left = Node(task, data)
                 else:
-                    self.left.insert(data)
+                    self.left.insert(task, data)
             elif data > self.data:
                 if self.right is None:
-                    self.right = Node(data)
+                    self.right = Node(task, data)
                 else:
-                    self.right.insert(data)
+                    self.right.insert(task, data)
+            elif data == self.data:
+                self.right.insert(task, data)
 
         else:
             self.data = data
+            self.task = task
 
     # This returns the size of the binary tree -- for debugging purposes
     def getSize(self):
@@ -38,6 +42,6 @@ class Node:
     def PrintTree(self):
         if self.left:
             self.left.PrintTree()
-        print(self.data),
+        print(self.data, self.task)
         if self.right:
             self.right.PrintTree()
