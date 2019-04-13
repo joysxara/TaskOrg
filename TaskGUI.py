@@ -7,7 +7,8 @@ layout = [
             [sg.Text('Task Organizer')],
             [sg.Text('Task Name: ', size=(15,1)), sg.InputText()],
             [sg.Text('Priority: ', size=(15,1)), sg.InputCombo(['LOW', 'MEDIUM', 'HIGH'], size=(20,3))],
-            [sg.Button('Add'), sg.Button('Done')]
+            [sg.Button('Add'), sg.Button('Done')],
+            [sg.Output(size=(80,10))]
         ]
 
 window = sg.Window('Task Organizer App').Layout(layout)
@@ -17,14 +18,15 @@ dict = {'LOW': 1, 'MEDIUM': 2, 'HIGH': 3}
 
 while True:
     event, values = window.Read()
-    if event is not None and event == 'Add':
-        print(event, dict[values[1]])
+    if event is None:
+        break   
+    elif event == 'Add':
+        print(values[0], dict[values[1]])
         root.insert(values[0], dict[values[1]])
-    if event == 'Done' or event is None:
+    elif event == 'Done':
         print('SIZE:')
         print(root.getSize())
         print('TREE:')
         root.PrintTree()
-        break
 
 window.Close()

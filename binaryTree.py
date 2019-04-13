@@ -31,6 +31,8 @@ class Node:
         else:
             self.data = data
             self.task = task
+        
+        return self
 
     # This returns the size of the binary tree -- for debugging purposes
     def getSize(self):
