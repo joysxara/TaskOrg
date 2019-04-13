@@ -11,7 +11,7 @@ layout = [
         ]
 
 window = sg.Window('Task Organizer App').Layout(layout)
-root = Node(None)
+root = Node(None, None)
 
 dict = {'LOW': 1, 'MEDIUM': 2, 'HIGH': 3}
 
@@ -19,7 +19,7 @@ while True:
     event, values = window.Read()
     if event is not None and event == 'Add':
         print(event, dict[values[1]])
-        root.insert(dict[values[1]])
+        root.insert(values[0], dict[values[1]])
     if event == 'Done' or event is None:
         print('SIZE:')
         print(root.getSize())
