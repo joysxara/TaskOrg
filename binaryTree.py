@@ -3,7 +3,6 @@
 # Workflow Automation: Prioritize
 # Binary Tree Data Structure
 
-#include TestGUI.py //check syntax!! how do I include JZ's GUI?
 #include everything
 
 class Node:
@@ -33,6 +32,12 @@ class Node:
             self.data = data
             self.task = task
 
+    # This returns the size of the binary tree -- for debugging purposes
+    def getSize(self):
+        leftSize = self.left.getSize() if self.left else 0
+        rightSize = self.right.getSize() if self.right else 0
+        return leftSize + 1 + rightSize
+
     #Print the tree
     def PrintTree(self):
         if self.left:
@@ -40,25 +45,3 @@ class Node:
         print(self.data, self.task)
         if self.right:
             self.right.PrintTree()
-
-#TEST: Prompt user give a value betwen 1~10
-print('Give task and priority (task priority):') #ask for the first number
-print('If you\'re done, type in (done -1)')
-task, value = input().split()
-root = Node(task, int(value))
-
-while value != '-1':
-    print('Give task and priority (task priority): ')
-    task, value = input().split()
-    if value == '-1':
-        break
-    else:
-        root.insert(task, int(value))
-
-print('terminate')
-
-root.PrintTree()
-        
-
-
-        
