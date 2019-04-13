@@ -8,47 +8,50 @@
 
 class Node:
 
-    def __init__(self, data):
+    def __init__(self, task, data):
         self.left = None
         self.right = None
         self.data = data
+        self.task = task
 
-    def insert(self, data): #compare the new value wiht the parent node
+    def insert(self, task, data): #compare the new value wiht the parent node
         if self.data:
             if data < self.data:
                 if self.left is None:
-                    self.left = Node(data)
+                    self.left = Node(task, data)
                 else:
-                    self.left.insert(data)
+                    self.left.insert(task, data)
             elif data > self.data:
                 if self.right is None:
-                    self.right = Node(data)
+                    self.right = Node(task, data)
                 else:
-                    self.right.insert(data)
+                    self.right.insert(task, data)
 
         else:
             self.data = data
+            self.task = task
 
     #Print the tree
     def PrintTree(self):
         if self.left:
             self.left.PrintTree()
-        print(self.data),
+        print(self.data, self.task)
         if self.right:
             self.right.PrintTree()
 
 #TEST: Prompt user give a value betwen 1~10
-print('Put in a value between 1~10: ') #ask for the first number
-value = input()
-root = Node(int(value))
+print('Give task and priority (task priority):') #ask for the first number
+print('If you\'re done, type in (done -1)')
+task, value = input().split()
+root = Node(task, int(value))
 
 while value != '-1':
-    print('Put in a value between 1~10: ')
-    value = input()
+    print('Give task and priority (task priority): ')
+    task, value = input().split()
     if value == '-1':
         break
     else:
-        root.insert(int(value))
+        root.insert(task, int(value))
 
 print('terminate')
 
